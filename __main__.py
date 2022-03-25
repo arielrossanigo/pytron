@@ -1,17 +1,20 @@
+import os
+from datetime import datetime
+
 import click
 
 from game import Match
 
 
 @click.command()
-@click.option('--rows', default=10, help='Number of rows.')
-@click.option('--cols', default=10, help='Number of columns.')
-# @click.option('-b', '--bot', required=True, multiple=True, help=('Folder bot name.'))
+@click.option('--size', default=10, help='Board size.')
 @click.argument('bots', nargs=-1)
-def main(rows, cols, bots):
-    match = Match(bots, rows, cols)
+def main(size, bots):
+    match = Match(bots, size)
     match.play()
-
+    filename = datetime.strftime(datetime.utcnow(), '%Y%m%d_%H%M%S') + '.json'
+    match.save(os.path.join('www', 'matches', filename))
+    print(f"Visit http://localhost:8000?file={filename}")
 
 if __name__ == '__main__':
     main()

@@ -1,6 +1,8 @@
 import importlib
+import json
 import random
 from collections import defaultdict
+from itertools import zip_longest
 
 
 def state_to_tuple(state):
@@ -16,6 +18,7 @@ class PytronEngine:
         self.n_rows = n_rows
         self.n_columns = n_columns
         self.init_state(bots)
+        self.scores = None
 
     def init_state(self, bots):
         self.state = []
@@ -36,19 +39,19 @@ class PytronEngine:
             current_state = state_to_tuple(self.state)
             for bot_id, bot in enumerate(self.bots):
                 if bot_id in self.dead_bots:
-                    continue
-                action = bot.get_action(current_state)
-                action = self.get_valid_action(action, bot_id)
+                    action = self.state[bot_id][-1]
+                else:
+                    action = bot.get_action(current_state)
+                    action = self.get_valid_action(action, bot_id)
                 actions.append(action)
 
             self.apply_actions(actions)
 
         # scores are the number of steps the bot survive
-        scores = [len(path) for path in self.state]
-        return scores
+        self.scores = [len(set(path)) for path in self.state]
 
     def game_finished(self):
-        return len(self.bots) - len(self.dead_bots) <= 1
+        return len(self.bots) == len(self.dead_bots)
 
     def apply_actions(self, actions):
         by_position = defaultdict(list)
@@ -73,10 +76,9 @@ class PytronEngine:
 
         # now it is possible to really apply the actions of no deads bots
         for bot_id, action in enumerate(actions):
-            if bot_id not in self.dead_bots:
-                # add the head of the pytron
-                self.state[bot_id].append(action)
-                self.used_positions.add(action)
+            # add the head of the pytron
+            self.state[bot_id].append(action)
+            self.used_positions.add(action)
 
     def get_valid_action(self, action, bot_id):
         prev_action = self.state[bot_id][-1]
@@ -106,11 +108,33 @@ def load_bot(bot_id, bot_name):
 
 class Match:
     'Class to keep bots, engine and scores'
-    def __init__(self, bots_names, n_rows, n_columns):
+    def __init__(self, bots_names, size):
         self.bots_names = bots_names
+        self.size = size
         self.bots = [load_bot(bot_id, bot) for bot_id, bot in enumerate(bots_names)]
-        self.engine = PytronEngine(self.bots, n_rows, n_columns)
+        self.engine = PytronEngine(self.bots, size, size)
 
     def play(self):
-        scores = self.engine.play()
-        print(scores)
+        self.engine.play()
+
+    def save(self, filename):
+        if not self.engine.game_finished():
+            raise Exception("Play the match first")
+
+        steps = []
+        for players_positions in zip_longest(*self.engine.state):
+            steps.append(players_positions)
+
+        by_bot = [(self.bots[bot_id].name, score)
+                  for bot_id, score in enumerate(self.engine.scores)]
+        score_board = sorted(by_bot, key=lambda x: x[1], reverse=True)
+
+        result = {
+            'speed': 500,
+            'size': self.size,
+            'steps': steps,  # step, players, positions
+            'score_board': score_board
+        }
+        with open(filename, 'wt', encoding='utf-8') as f:
+            json.dump(result, f)
+
