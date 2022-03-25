@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Pytron</title>
+  <script src="brython.min.js"></script>
+  <script src="brython_stdlib.js"></script>
+  <style>
+  html, body {
+    height: 100%;
+    margin: 0;
+  }
+  body {
+    background: black;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+  canvas {
+    border: 1px solid white;
+    padding-left: 1px;
+    padding-top: 1px;
+  }
+  </style>
+</head>
+<body onload="brython()">
+<script type="text/python" src="grafico_juego.py"></script>
+
+<canvas id="juego" width="151" height="151"></canvas>
+
+</body>
+</html> 
