@@ -137,4 +137,3 @@ class Match:
         }
         with open(filename, 'wt', encoding='utf-8') as f:
             json.dump(result, f)
-
