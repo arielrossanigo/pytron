@@ -126,9 +126,9 @@ class PytronEngine:
         return self.state.bots_path
 
 
-def load_bot(bot_id, bot_name):
+def load_bot(bot_id, bot_name, size):
     module = importlib.import_module(f'bots.{bot_name}.main')
-    bot = module.PlayerBot(bot_id, bot_name)
+    bot = module.PlayerBot(bot_id, bot_name, size, size)
     return bot
 
 
@@ -137,7 +137,7 @@ class Match:
     def __init__(self, bots_names, size):
         self.bots_names = bots_names
         self.size = size
-        self.bots = [load_bot(bot_id, bot) for bot_id, bot in enumerate(bots_names)]
+        self.bots = [load_bot(bot_id, bot, size) for bot_id, bot in enumerate(bots_names)]
         self.engine = PytronEngine(self.bots, size, size)
 
     def play(self):
