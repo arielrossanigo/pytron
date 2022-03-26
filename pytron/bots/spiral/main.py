@@ -1,6 +1,6 @@
 import random
 
-from bot import Bot, Action
+from pytron.bot import Bot, Action
 
 
 class PlayerBot(Bot):
@@ -11,11 +11,11 @@ class PlayerBot(Bot):
 
     def get_action(self, board):
         if self.tick == self.counter:
-            action = Action.Rigth
+            action = Action.Right
             self.counter = 0
             self.tick += 1
         else:
             action = Action.Forward
             self.counter += 1
-        
+
         return action

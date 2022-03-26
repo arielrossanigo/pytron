@@ -3,7 +3,7 @@ from enum import Enum
 
 class Action(Enum):
     Left = -90
-    Rigth = 90
+    Right = 90
     Forward = 0
 
 
