@@ -11,9 +11,10 @@ from game import Match
 
 @click.command()
 @click.option('--size', default=90, help='Board size.')
+@click.option('--speed', default=100, help='Speed step in milliseconds.')
 @click.argument('bots', nargs=-1)
-def main(size, bots):
-    match = Match(bots, size)
+def main(size, bots, speed):
+    match = Match(bots, size, speed)
     match.play()
     filename = os.path.join('matches',
                             datetime.strftime(datetime.utcnow(), '%Y%m%d_%H%M%S') + '.json')
