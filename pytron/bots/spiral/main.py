@@ -11,7 +11,7 @@ class PlayerBot(Bot):
 
     def get_action(self, board):
         if self.tick == self.counter:
-            action = Action.Rigth
+            action = Action.Right
             self.counter = 0
             self.tick += 1
         else:
