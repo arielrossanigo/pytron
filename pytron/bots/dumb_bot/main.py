@@ -1,6 +1,6 @@
 import random
 
-from bot import Bot, Action
+from pytron.bot import Bot, Action
 
 
 class PlayerBot(Bot):

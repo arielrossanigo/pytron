@@ -6,7 +6,7 @@ from datetime import datetime
 
 import click
 
-from game import Match
+from pytron.game import Match
 
 
 @click.command()
@@ -18,8 +18,8 @@ def main(size, bots, speed):
     match.play()
     filename = os.path.join('matches',
                             datetime.strftime(datetime.utcnow(), '%Y%m%d_%H%M%S') + '.json')
-    match.save(os.path.join('www', filename))
-    proc = subprocess.Popen('python -m http.server --directory www', shell=True)
+    match.save(os.path.join('pytron', 'www', filename))
+    proc = subprocess.Popen('python -m http.server --directory pytron/www', shell=True)
     webbrowser.open_new_tab(f'http://localhost:8000?file={filename}')
     time.sleep(2.5)  # Marco's contribution
     proc.kill()

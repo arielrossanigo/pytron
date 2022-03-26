@@ -128,4 +128,4 @@ dmypy.json
 # Pyre type checker
 .pyre/
 
-www/matches/**.json
+pytron/www/matches/**.json
