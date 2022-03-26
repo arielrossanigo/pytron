@@ -15,9 +15,11 @@ class Orientation(Enum):
 
 
 class Bot:
-    def __init__(self, id_, name):
+    def __init__(self, id_, name, board_row_size, board_column_size):
         self.id = id_
         self.name = name
+        self.board_row_size = board_row_size
+        self.board_column_size = board_column_size
 
     def get_action(self, board):
         pass
