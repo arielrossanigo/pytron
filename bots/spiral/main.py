@@ -7,13 +7,15 @@ class PlayerBot(Bot):
     def __init__(self, *args, **kwargs):
         super().__init__(*args, **kwargs)
         self.tick = 0
-        self.turns = 1
+        self.counter = 0
 
     def get_action(self, board):
-        if self.tick % self.turns == 0:
-            action = Action.Forward
-            self.turns += 1
-        else:
+        if self.tick == self.counter:
             action = Action.Rigth
-        self.tick += 1
+            self.counter = 0
+            self.tick += 1
+        else:
+            action = Action.Forward
+            self.counter += 1
+        
         return action
