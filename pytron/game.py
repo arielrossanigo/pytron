@@ -5,7 +5,7 @@ import random
 from collections import defaultdict
 from itertools import zip_longest
 
-from bot import Orientation
+from pytron.bot import Orientation
 
 POSSIBLE_DELTAS = {
     Orientation.North: (-1, 0),
@@ -127,7 +127,7 @@ class PytronEngine:
 
 
 def load_bot(bot_id, bot_name, size):
-    module = importlib.import_module(f'bots.{bot_name}.main')
+    module = importlib.import_module(f'pytron.bots.{bot_name}.main')
     bot = module.PlayerBot(bot_id, bot_name, size, size)
     return bot
 
