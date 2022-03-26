@@ -10,7 +10,7 @@ from game import Match
 
 
 @click.command()
-@click.option('--size', default=10, help='Board size.')
+@click.option('--size', default=90, help='Board size.')
 @click.argument('bots', nargs=-1)
 def main(size, bots):
     match = Match(bots, size)

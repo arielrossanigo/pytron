@@ -156,7 +156,7 @@ class Match:
         score_board = sorted(by_bot, key=lambda x: x[1], reverse=True)
 
         result = {
-            'speed': 500,
+            'speed': 100,
             'size': self.size,
             'steps': steps,  # step, players, positions
             'score_board': score_board
