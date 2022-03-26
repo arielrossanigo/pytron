@@ -20,7 +20,7 @@ def main(size, bots, speed):
                             datetime.strftime(datetime.utcnow(), '%Y%m%d_%H%M%S') + '.json')
     match.save(os.path.join('www', filename))
     proc = subprocess.Popen('python -m http.server --directory www', shell=True)
-    webbrowser.open_new(f'http://localhost:8000?file={filename}')
+    webbrowser.open_new_tab(f'http://localhost:8000?file={filename}')
     time.sleep(2.5)  # Marco's contribution
     proc.kill()
 
