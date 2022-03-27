@@ -152,7 +152,7 @@ class Match:
         for players_positions in zip_longest(*self.engine.get_bots_historical_positions()):
             steps.append(players_positions)
 
-        by_bot = [(self.bots[bot_id].name, score)
+        by_bot = [(bot_id, self.bots[bot_id].name, score)
                   for bot_id, score in enumerate(self.engine.scores)]
         score_board = sorted(by_bot, key=lambda x: x[1], reverse=True)
 

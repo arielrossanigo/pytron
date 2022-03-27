@@ -16,7 +16,7 @@ score_board = None
 
 pixel = 10
 colores = ['cyan', 'red', 'yellow', 'green',
-        'white', 'salmon', 'magenta', 'gray']
+        'white', 'salmon', 'magenta', 'gray', 'brown', 'pink']
 
 canvas = document['juego']
 ctx = canvas.getContext('2d')
@@ -33,20 +33,19 @@ def dibujar(*args):
         finalizar()
         return
     for pos, jugador in enumerate(partida[turno-1]):
-        console.log(jugador)
         ctx.fillStyle = colores[pos]
         ctx.fillRect(jugador[0], jugador[1], pixel-1, pixel-1)
 
 
 def finalizar():
-    global intervalo, turno, score_board
+    global intervalo, turno, score_board, colores
 
     timer.clear_interval(intervalo)
     turno = 0
     mensaje = ''
     for score in score_board:
-        nombre, puntos = score
-        mensaje += '{}) {} <br>'.format(puntos, nombre)
+        bot_id, nombre, puntos = score
+        mensaje += '{} ({}) {} <br>'.format(puntos, colores[bot_id], nombre)
     InfoDialog('Tabla de posiciones 👇', mensaje)
 
     
