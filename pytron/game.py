@@ -154,7 +154,7 @@ class Match:
 
         by_bot = [(bot_id, self.bots[bot_id].name, score)
                   for bot_id, score in enumerate(self.engine.scores)]
-        score_board = sorted(by_bot, key=lambda x: x[1], reverse=True)
+        score_board = sorted(by_bot, key=lambda x: x[-1], reverse=True)
 
         result = {
             'speed': self.speed,
