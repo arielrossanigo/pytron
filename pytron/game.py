@@ -134,10 +134,9 @@ def load_bot(bot_id, bot_name, size):
 
 class Match:
     'Class to keep bots, engine and scores'
-    def __init__(self, bots_names, size, speed=100):
+    def __init__(self, bots_names, size):
         self.bots_names = bots_names
         self.size = size
-        self.speed = speed
         self.bots = [load_bot(bot_id, bot, size) for bot_id, bot in enumerate(bots_names)]
         self.engine = PytronEngine(self.bots, size, size)
 
@@ -157,7 +156,6 @@ class Match:
         score_board = sorted(by_bot, key=lambda x: x[-1], reverse=True)
 
         result = {
-            'speed': self.speed,
             'size': self.size,
             'steps': steps,  # step, players, positions
             'score_board': score_board

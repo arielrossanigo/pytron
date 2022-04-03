@@ -62,7 +62,10 @@ def on_complete(req):
                 j[0] = j[0] * pixel
                 j[1] = j[1] * pixel
         largo = resp['size']
-        velocidad = resp['speed']
+        try:
+            velocidad = document.query['speed'] 
+        except KeyError:
+            velocidad = 100
         score_board = resp['score_board']
         intervalo = timer.set_interval(dibujar, velocidad)
 

@@ -14,13 +14,13 @@ from pytron.game import Match
 @click.option('--speed', default=100, help='Speed step in milliseconds.')
 @click.argument('bots', nargs=-1)
 def main(size, bots, speed):
-    match = Match(bots, size, speed)
+    match = Match(bots, size)
     match.play()
     filename = os.path.join('matches',
                             datetime.strftime(datetime.utcnow(), '%Y%m%d_%H%M%S') + '.json')
     match.save(os.path.join('pytron', 'www', filename))
     proc = subprocess.Popen('python -m http.server --directory pytron/www', shell=True)
-    webbrowser.open_new_tab(f'http://localhost:8000?file={filename}')
+    webbrowser.open_new_tab(f'http://localhost:8000?file={filename}&speed={speed}')
     time.sleep(2.5)  # Marco's contribution
     proc.kill()
 
