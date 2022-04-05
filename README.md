@@ -51,6 +51,21 @@ will turn right in each iteration. The possible actions are `Right`, `Left` and
 `Forward`.
 
 
+### Play pytron with your new bot!
+
+To test how good is your new bot, just play pytron selecting it as a new player!
+
+You can let your bot challange one of our bots:
+```bash
+pytron <your_bot_name> spiral
+```
+
+And also, you can add multiple instances of the same bot!
+
+```bash
+pytron <your_bot_name> <your_bot_name> spiral escalerita escalerita
+```
+
 ### Board param
 
 To create a smarter bot, you may need to know the current state of the game. You can
