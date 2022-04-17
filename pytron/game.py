@@ -8,10 +8,12 @@ from itertools import zip_longest
 from pytron.bot import Orientation
 
 POSSIBLE_DELTAS = {
-    Orientation.North: (-1, 0),
-    Orientation.East: (0, 1),
-    Orientation.South: (1, 0),
-    Orientation.West: (0, -1),
+                    #   x   y
+                    #  col row
+    Orientation.North: (0, -1),
+    Orientation.East:  (1,  0),
+    Orientation.South: (0,  1),
+    Orientation.West: (-1,  0),
 }
 
 
@@ -24,7 +26,7 @@ class GameState:
             while True:
                 row_number = random.randint(1, n_rows - 1)
                 col_number = random.randint(1, n_columns - 1)
-                position = (row_number, col_number)
+                position = (col_number, row_number)
                 if position not in self.used_positions:
                     break
             self.bots_path.append([position])

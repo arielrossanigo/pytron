@@ -83,7 +83,7 @@ if a bot starts in position (1, 1), and moves to (1, 2), and another bot starts 
     [(3, 2), (2 2)],  # second bot
 ]
 ```
-The positions are read as (row_number, column_number).
+The positions are read as (column_number, row_number).
 
 - `bots_orientation`: the orientation of each bot, which means it will be the direction
 where it will move if the returend action is `Forward`. The possible values are
