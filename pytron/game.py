@@ -90,7 +90,7 @@ class PytronEngine:
         for bot_id, (position, _) in enumerate(next_position_and_orientation):
             # if someone goes outside of the board, it lose
             row, col = position
-            if not 0 <= row <= self.n_rows or not 0 <= col <= self.n_columns:
+            if not 0 <= row < self.n_rows or not 0 <= col < self.n_columns:
                 self.dead_bots.add(bot_id)
 
             # if someone crash some tail, it lose
