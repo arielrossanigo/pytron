@@ -62,6 +62,8 @@ def on_complete(req):
                 j[0] = j[0] * pixel
                 j[1] = j[1] * pixel
         largo = resp['size']
+        canvas.attrs["width"] = largo * 10
+        canvas.attrs["height"] = canvas.attrs["width"]
         try:
             velocidad = document.query['speed'] 
         except KeyError:
